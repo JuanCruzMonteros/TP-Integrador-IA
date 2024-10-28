@@ -1,0 +1,21 @@
+<div>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <app-custom-input
+            label="Email"
+            [control]="loginForm.get('email')"
+            placeHolder="enter your email"
+            type="email"
+            errorMessage="Please enter a valid email"
+        />
+
+        <app-custom-input
+            label="Password"
+            [control]="loginForm.get('password')"
+            placeHolder="enter your password"
+            type="password"
+            errorMessage="Please enter a valid password"
+        />
+
+        <button type="submit" [disabled]="loginForm.invalid">Login</button>
+    </form>
+</div>

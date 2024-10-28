@@ -1,7 +1,7 @@
 import { AuthAdapter } from '@auth/adapters';
 import { AuthData, LoginResponse } from '@auth/models/auth.model';
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 
 
@@ -9,16 +9,16 @@ import { map, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  http = Inject(HttpClient)
   private readonly baseUrl = "http://localhost:4000/auth"
+  http = inject(HttpClient)
 
   login(user: AuthData): Observable<string> {
     return this.http.post<LoginResponse>(`${this.baseUrl}/login`, user).pipe(
-      map(AuthAdapter)
+      map((response: LoginResponse) => AuthAdapter(response))
     )
   }
 
   register(user: AuthData): Observable<void> {
-    return this.http.post<void>(`${this.baseUrl}/login`, user)
+    return this.http.post<void>(`${this.baseUrl}/register`, user)
   }
 }
