@@ -1,6 +1,5 @@
 import { HttpInterceptorFn } from '@angular/common/http';
-import { LocalManagerService } from '@auth/services/local-manager.service';
-import { LocalKeys } from '../services/local-manager.service';
+import { LocalKeys, LocalManagerService } from '@auth/services/local-manager.service';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
     const token = LocalManagerService.getElement(LocalKeys.token);
